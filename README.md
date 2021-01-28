@@ -21,4 +21,3 @@ Terraform module for creating a VPC Subnet using a specific CIDR notation.
 | id | ID of the created Subnet | 
 | ipv4_cidr_block | IPv4 CIDR block for the subnet |
 | available_ipv4_address_count | Number of IPs in the subnet  | 
-| primary_ip4_address | Primary private IP address of the virtual server instance |
