@@ -1,6 +1,52 @@
 # IBM Cloud VPC Subnet CIDR Module
 Terraform module for creating a VPC Subnet using a specific CIDR notation.
 
+## Usage
+### Subnet **without** a public gateway attached
+
+```
+data "ibm_resource_group" "group" {
+  name = var.resource_group
+}
+
+data "ibm_is_zones" "mzr" {
+  region = var.region
+}
+
+module subnet {
+  source         = "git::https://github.com/cloud-design-dev/IBM-Cloud-VPC-Subnet-CIDR-Module.git"
+  name           = var.name
+  resource_group = data.ibm_resource_group.group.id
+  network_acl    = var.network_acl
+  address_count  = var.address_count
+  vpc_id         = var.vpc_id
+  zone           = data.ibm_is_zones.mzr.zones[0]
+}
+```
+
+### Subnet **with** a public gateway attached
+
+```
+data "ibm_resource_group" "group" {
+  name = var.resource_group
+}
+
+data "ibm_is_zones" "mzr" {
+  region = var.region
+}
+
+module subnet {
+  source         = "git::https://github.com/cloud-design-dev/IBM-Cloud-VPC-Subnet-CIDR-Module.git"
+  name           = var.name
+  resource_group = data.ibm_resource_group.group.id
+  network_acl    = var.network_acl
+  address_count  = var.address_count
+  vpc_id         = var.vpc_id
+  zone           = data.ibm_is_zones.mzr.zones[0]
+  public_gateway = var.public_gateway
+}
+```
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
